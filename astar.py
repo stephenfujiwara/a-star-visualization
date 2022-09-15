@@ -2,7 +2,7 @@ from queue import PriorityQueue
 import pygame
 
 # set display
-WIDTH = 500
+WIDTH = 800
 WIN = pygame.display.set_mode((WIDTH, WIDTH))
 pygame.display.set_caption("A* Path Finding Visualization")
 
@@ -44,10 +44,10 @@ class Tile:
         return self.color == BLACK
     
     def is_start(self):
-        return self.color == BLUE
+        return self.color == TURQUOISE
 
     def is_end(self):
-        return self.color == BLUE
+        return self.color == ORANGE
 
     def reset(self):
         self.color = WHITE
@@ -62,13 +62,13 @@ class Tile:
         self.color = BLACK
     
     def make_start(self):
-        self.color = BLUE
+        self.color = TURQUOISE
 
     def make_end(self):
-        self.color =BLUE
+        self.color = ORANGE
 
     def make_path(self):
-        self.color = BLUE
+        self.color = PURPLE
     
     def draw(self, win):
         pygame.draw.rect(win, self.color, (self.x, self.y, self.width, self.width))
@@ -85,7 +85,7 @@ class Tile:
         if self.col < self.total_rows - 1 and not grid[self.row][self.col + 1].is_barrier():
             self.neighbors.append(grid[self.row][self.col + 1])
         # if not on border and tile to left is not barrier
-        if self.row > 0 and not grid[self.row][self.col].is_barrier():
+        if self.row > 0 and not grid[self.row][self.col - 1].is_barrier():
             self.neighbors.append(grid[self.row][self.col - 1])
         #print(self.neighbors)
 
@@ -125,7 +125,7 @@ def heuristic(p1, p2):
     # manhattan distance
     x1, y1 = p1
     x2, y2 = p2
-    return abs(x2 - x1) + abs(y2 - y1)
+    return abs(x1 - x2) + abs(y1 - y2)
 
 
 def construct_path(came_from, current, draw):
@@ -196,7 +196,7 @@ def get_clicked_position(pos, rows, width):
 
 
 def main(win, width):
-    ROWS = 30
+    ROWS = 50
     grid = make_grid(ROWS, width)
 
     start = None
