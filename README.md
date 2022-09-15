@@ -11,7 +11,7 @@ Djikstra's Algorithm uses (favoring vertices closest to the starting vertex) _an
 
 At each step, A* determines which of its path to extend by selecting the path that minimizes:
 
-$ f(n) = g(n) + h(n)$
+$ f(n) = g(n) + h(n) $
 
 where $n$ is a particular node on the graph, $g(n)$ is the total cost/distance
 of the path from the start node to $n$, and $h(n)$ is a *heuristic*
